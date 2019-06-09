@@ -74,7 +74,7 @@ router.post('/', (req, res) => {
         fecha: body.fecha,
         numero_personas: body.numero_personas,
         fecha_salida: body.fecha_salida,
-        precio: body.precio
+        pago: body.pago
     });
 
     reserva.save((err, reservaDB) => {
@@ -110,7 +110,7 @@ router.put('/:id', (req, res) => {
         fecha: body.fecha,
         numero_personas: body.numero_personas,
         fecha_salida: body.fecha_salida,
-        precio: body.precio
+        pago: body.pago
     }
 
     Reserva.findOneAndUpdate(id, newRerserva, (err, reservaActualizada) => {

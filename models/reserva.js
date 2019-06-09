@@ -8,19 +8,24 @@ let reservaSchema = new Schema({
         required: true
     },
     correo: {
-        type: String
+        type: String,
+        required: true
     },
     fecha: {
-        type: String
+        type: String,
+        required: true
     },
     numero_personas: {
-        type: Number,
+        type: String,
+        required: true
     },
     fecha_salida: {
-        type: String
+        type: String,
+        required: true
     },
-    precio: {
-        type: Number
+    pago: {
+        type: Boolean,
+        required: true
     }
 
 });

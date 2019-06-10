@@ -9,6 +9,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var reservaRouter = require('./routes/reserva');
 
+var cors = require('cors');
 
 var app = express();
 
@@ -26,6 +27,7 @@ mongoose.connect('mongodb+srv://vicse:RhW7E4bJ6ICoLORw@cluster0-pfvnd.mongodb.ne
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

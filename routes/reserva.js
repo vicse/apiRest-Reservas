@@ -9,16 +9,11 @@ router.get('/', (req, res) => {
 
     Reserva.find({}, (err, reservas) => {
         if (err) {
-            return res.status(400).json({
-                ok: false,
-                err
-            });
+            console.log(err);
+            res.status(500);
+        } else {
+            res.json(reservas);
         }
-
-        res.json({
-            ok: true,
-            reservas
-        });
     });
 
 });

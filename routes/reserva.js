@@ -94,30 +94,22 @@ router.post('/', (req, res) => {
 //Actualizar una reserva  por ID
 //============================
 
-router.put('/:id', (req, res) => {
+router.put('/', (req, res) => {
 
-    let id = req.params.id;
     let body = req.body;
 
-    let newRerserva = {
+    let reserva = new Reserva({
         nombre: body.nombre,
         correo: body.correo,
         fecha: body.fecha,
         numero_personas: body.numero_personas,
         fecha_salida: body.fecha_salida,
         pago: body.pago
-    }
+    });
 
-    Reserva.findOneAndUpdate(id, newRerserva, (err, reservaActualizada) => {
+    reserva.save((err, reservaDB) => {
 
         if (err) {
-            return res.status(500).json({
-                ok: false,
-                err
-            });
-        }
-
-        if (!reservaActualizada) {
             return res.status(400).json({
                 ok: false,
                 err
@@ -126,9 +118,11 @@ router.put('/:id', (req, res) => {
 
         res.json({
             ok: true,
-            reserva: reservaActualizada
+            reserva: reservaDB
         });
+
     });
+
 });
 
 //===========================

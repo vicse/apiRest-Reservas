@@ -97,32 +97,39 @@ router.post('/', (req, res) => {
 router.put('/', (req, res) => {
 
     let body = req.body;
+    let id = body._id;
 
-    let reserva = new Reserva({
+    let newReserva = {
         nombre: body.nombre,
         correo: body.correo,
         fecha: body.fecha,
         numero_personas: body.numero_personas,
         fecha_salida: body.fecha_salida,
         pago: body.pago
-    });
+    };
 
-    reserva.save((err, reservaDB) => {
+    Reserva.findOneAndUpdate(id, newReserva, (err, reservaActualizada) => {
 
         if (err) {
-            return res.status(400).json({
+            return res.status(500).json({
                 ok: false,
                 err
             });
         }
 
+        if (!reservaActualizada) {
+            return res.status(400).json({
+                ok: false,
+                err,
+                message: 'Reserva no encontrada'
+            });
+        }
+
         res.json({
             ok: true,
-            reserva: reservaDB
+            reserva: reservaActualizada
         });
-
     });
-
 });
 
 //===========================
